@@ -11,25 +11,39 @@
 
     <div class="login-container" >
 
-        <form class="login-form">
-          <div class="login-label"> Sign in </div>
+        <form class="login-form" ng-submit="createUser()" name="registration">
+          <div class="login-label"> Sign Up </div>
           <div class="input-container">
 
-              <input type="text" placeholder="Enter username">
+              <input type="text" name="email" ng-model="email" placeholder="Enter email" required>
+              <!--<span class="has-error" ng-if="registration.email.$dirty">-->
+                <!--<span ng-show="registration.email.$error.required" style="color: red">Email address is required.</span>-->
+              <!--</span>-->
 
+              <input type="text" name="username" ng-model="username" placeholder="Enter username" required>
+              <!--<span class="has-error" ng-if="registration.username.$dirty">-->
+                <!--<span ng-show="registration.username.$error.required" style="color: red">Email address is required.</span>-->
+              <!--</span>-->
 
-              <input type="text" placeholder="Enter password">
+              <input type="password" name="password" ng-minlength="6" compare-to="confirm" ng-model="password" placeholder="Enter password" required>
+              <!--<span class="has-error" ng-if="registration.password.$dirty">-->
+                <!--<span ng-show="registration.password.$error.required" style="color: red">Email address is required.</span>-->
+                <!--<span ng-show="registration.password.$error.minlength" style="color: red">Email address is required.</span>-->
+              <!--</span>-->
 
+              <input type="password" name="confirm" ng-model="confirm" placeholder="Confirm password">
+              <!--<span class="has-error" ng-if="registration.confirm.$dirty">-->
+                <!--<span ng-show="registration.confirm.$error.required" style="color: red">Email address is required.</span>-->
+                <!--<span ng-show="registration.confirm.$error.compareTo" style="color: red">Email address is required.</span>-->
+              <!--</span>-->
 
-              <input type="text" placeholder="Confirm password">
 
           </div>
 
           <div class="login-actions">
-            <button class="log-in" type="submit">Sign In</button>
-            <div class="other-actions">
-              <a ng-href='user' class="sign-up">Sign Up</a>
-              <div class="recover-password">Forgot password?</div>
+            <button class="log-in" type="submit">Sign Up</button>
+            <div class="other-actions-registration">
+              <a class="recover-password-reg">Forgot password?</a>
             </div>
           </div>
 

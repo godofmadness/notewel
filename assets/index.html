@@ -21,32 +21,60 @@
     + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
     <!--STYLES-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
   </head>
-  <body ng-app="brushfire" ng-controller="homePageController" ng-cloak>
-    <div class="container-fluid">
-      <!-- Creates the navbar -->
-      <nav class="navbar navbar-default navbar-inverse">
-        <!-- This creates the mechanism for collapse button -->
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <!-- This controls the number of lines in the image when the nav collapse -->
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        </button>
-        <!-- This is the brand on the left-hand side. -->
-        <a class="navbar-brand" href="#/"> Brushfire</a>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/#videos">Videos</a></li>
-            <li><a href="/#administration">User Administration</a></li>
-          </ul>
+  <body ng-app="notewel" ng-controller="layoutController" ng-cloak>
+
+
+    <div class="notewel-container ">
+
+      <div class="header row">
+
+        <div class="header-left col-md-10 row">
+          <!--<div class="header-left__notewel-icon">nV</div>-->
+          <img class="header-left__notewel-icon" src="images/noteWelLogo.png"></img>
+          <div class="header-left__menu">
+            <div class="header__menu-item">MY NOTEWELS</div>
+            <div class="header__menu-item">FRIENDS</div>
+            <div class="header__menu-item">CHAT</div>
+          </div>
         </div>
-      </nav>
-      <!-- Angular client-side routes determine the contents of this div. -->
+
+        <div class="header-right col-md-2">
+          <div class="header-right__loggedinuser">
+            <div ng-show="me" class="loggedinuser-username">
+              <div class=>{{me.username}}</div>
+              <div class="logout-button" ng-click="logout()">Logout</div>
+            </div>
+            <div ng-hide="me" class="not-loggedin-bar-state">
+              <a ng-href="#/login">Sign In</a>
+              <a ng-href="#/registration">Sign Up</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
       <div ng-view></div>
+
+
     </div>
+
+      <!--place to insert templates-->
+      <!-- Angular client-side routes determine the contents of this div. -->
+
+
+
+
+
+
+
+
+      <!--&lt;!&ndash; Angular client-side routes determine the contents of this div. &ndash;&gt;-->
+
+    <!--</div>-->
     <!--
     Client-side Templates
     ========================
@@ -83,6 +111,9 @@
     -->
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
+    <!--<script src="js/scripts.js"></script>-->
+
+
     <!--SCRIPTS END-->
   </body>
 </html>

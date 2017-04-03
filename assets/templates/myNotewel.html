@@ -1,10 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<div class="notewelHP row" >
+
+  <div class="notewels-owner-wrapper col-md-4">
+
+    <!--MY PAGE STATE-->
+    <div class="notewels-owner-info" ng-show="user.isMe">
+
+
+      <div class="main-info ">
+        <img src="../images/logo.png" class="icon" > </img>
+        <div class="info">
+          <div>{{user.username}}</div>
+          <div>{{user.email}}</div>
+
+          <!--<div class="edit-profile">EDIT PROFILE</div>-->
+        </div>
+      </div>
+
+
+      <div class="user-profile">
+        <form class="add-notewel" ng-submit="createNotewel()" name="addFrom">
+          <div class="textarea-container">
+            <textarea class="user-profile-input__message" placeholder="What's new?" name="message" ng-model="notewelMessage"></textarea>
+            <!--<div class="addons">-->
+              <!--You need to write something!-->
+            <!--</div>-->
+
+          </div>
+          <div class="notewel-action">
+            <div></div>
+            <button type="submit" class="btn btn-success btn-lg btn-block">ADD NOTEWEL</button>
+          </div>
+        </form>
+        <div ng-if="badInput">
+          You need to write something
+        </div>
+        <!--<div class="friends"></div>-->
+      </div>
+
+      <!--<div class="add-notewel-button"> ADD NOTEWEL</div>-->
+    </div>
+    <!---->
+
+
+    <!--   NOT MY PAGE STATE   -->
+    <div class="notewels-owner-info" ng-hide="user.isMe">
+
+
+      <div class="main-info ">
+        <img src="../images/logo.png" class="icon" > </img>
+        <div class="info">
+          <div>{{user.username}}</div>
+          <div>{{user.email}}</div>
+
+          <!--<div class="edit-profile">EDIT PROFILE</div>-->
+        </div>
+      </div>
+
+      <!--<div class="add-notewel-button"> ADD NOTEWEL</div>-->
+    </div>
+
+    <!---->
+
+
+
+    <div class="notewels-owner-info">
+
+      <div class="main-info ">
+        <div class="info">
+          <div>Friends</div>
+          <!--<div class="edit-profile">EDIT PROFILE</div>-->
+        </div>
+      </div>
+
+      <div class="user-profile">
+
+        <!--<div class="friends"></div>-->
+
+      </div>
+
+      <!--<div class="add-notewel-button"> ADD NOTEWEL</div>-->
+    </div>
+
+
+
+
+
+
+  </div>
+
+
+
+  <div class="user-notewels col-md-8">
+
+  <div class="notewel-rows-container">
+
+<!--TODO ADD CREATED TIME TO NOTEWEL-->
+
+
+    <div class="notewel-row-container"  ng-repeat="notewelRow in structurizedNotewelCollection" id="{{$index}}">
+
+      <div style="visibility: hidden">{{outerIndex = $index}}</div>
+      <div  ng-repeat="notewelInst in notewelRow" id="{{'nt' + outerIndex + $index}}" class="notewel {{notewelInst.style}}">
+        <div class=" head-info">
+          <div class="info-min">
+            <img src="../images/logo.png" class="icon head-icon"> </img>
+            <div class="info head-info-2">
+              <div>{{notewelInst.owner}} {{outerIndex}} {{$index}}</div>
+            </div>
+          </div>
+
+          <div ng-show="user.isMe" class="delete" ng-click="deleteNotewel(notewelInst.notewelId, outerIndex, $index)">
+            <img src=../images/close:deleteButton.png>
+          </div>
+        </div>
+        <div class="body">
+          <div class="body-content">
+            <div class="body-content-text">{{notewelInst.message}} {{notewelInst.notewelId}}</div>
+          </div>
+          <div class="body-actions">
+            <div class="likes">
+              <div class="like-counter">{{notewelInst.numberOfLikes}}</div>
+              <img ng-hide="notewelInst.liked" src="../images/notLiked.png" class="like-action" ng-click="like(notewelInst)">
+              <img ng-show="notewelInst.liked" src="../images/liked.ico" class="like-action" ng-click="like(notewelInst)">
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      </div>
+
+
+
+
+
+
+</div>
+

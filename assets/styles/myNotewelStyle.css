@@ -1,10 +1,268 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+.notewelHP {
+  background-repeat: no-repeat;
+  /*background-image: url("../images/notewelMyNotewelBackground.png");*/
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+}
+
+/*!*user info desktop*!*/
+/*.structurizedNotewelCollection-owner {*/
+  /*!*display: flex;*!*/
+  /*!*margin: 40px 10px 40px 60px;*!*/
+  /*height: 90%;*/
+  /*position: absolute;*/
+  /*left: 50px;*/
+  /*top:120px;*/
+/*}*/
+
+.notewels-owner-info {
+  display: flex;
+  flex-direction: column;
+  background-color: #464646;
+
+  height: %;
+  width: 90%;
+  margin: 40px 0px 0px 50px;
+  -webkit-box-shadow: -1px -1px 10px -1px rgba(0,0,0,0.51);
+  -moz-box-shadow: -1px -1px 10px -1px rgba(0,0,0,0.51);
+  box-shadow: -1px -1px 10px -1px rgba(0,0,0,0.51);
+}
+
+.user-profile {
+  /*background-color: #333333;*/
+  height: 100%;
+}
+
+.main-info {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  padding-bottom: 10px;
+  /*justify-content: space-between;*/
+  margin: 7px 7px 7px 7px;
+  background-color: #333333;
+  height: 25%;
+}
+
+.icon{
+  margin: 10px 0px 0px 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px 0px 20px;
+  color: white;
+}
+
+.info div:first-child {
+  font-size: 19px;
+}
+.info div:last-child {
+  opacity: 0.7;
+}
+
+.edit-profile {
+  padding: 5px;
+  background-color: #1fca23;
+}
+
+/*.add-notewel-button {*/
+  /*font-size: 20px;*/
+  /*color: white;*/
+  /*background-color:#1fca23;*/
+  /*height:10%;*/
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*align-items: center;*/
+/*}*/
+
+
+.notewels-owner-username {
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+}
+
+.add-notewel {
+  height: inherit;
+  background-color: #333333;
+  /*background-color: red;*/
+}
+
+.friends {
+  height: 40%;
+  background-color: green;
+}
+
+.textarea-container {
+  height: 85%;
+  width: 100%;
+
+}
+
+.textarea-container > textarea {
+  background-color: #333333;
+  color: white;
+  min-height: 150px;
+  max-height: 300px;
+  padding: 20px 20px 10px 20px;
+  height: 85%;
+  width: 100%;
+ resize: none;
+  border: none;
+  overflow: hidden;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.addons {
+  display: flex;
+  justify-content: center;
+  color: red;
+
+  height:13%;
+}
+
+
+.choose-styles-options {
+
+}
+
+.notewel-action {
+  display: flex;
+  justify-content: space-between;
+  height: 15%;
+}
+
+.add-notewel-button {
+  /*background-image: url("../images/sendIcon.png");*/
+  background-color: #333333;
+  border: none;
+  padding: 10px;
+  color: #1fca23;
+}
+
+.notewel-rows-container {
+  height: 100%;
+  width: 100%;
+  padding: 32px 20px 0px 20px;
+
+}
+
+.notewel-row-container {
+  margin-top: 10px;
+  height: 35% !important;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+/*NOTEWEL INSTANCE*/
+.notewel {
+  /*transition: width 2s;*/
+
+  /*right: 100px;*/
+  /*width: 100%;*/
+  margin: 10px;
+  max-width: 150%;
+  min-width: 35%;
+}
+
+.head-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 20%;
+  margin-top: 0px;
+  /*background-color: rgb(94,170,94);*/
+  /*border-bottom: solid 1px #333333;*/
+  color: black
+}
+
+.head-info-2 {
+  display: flex;
+  justify-content: center;
+
+  color: #333333;
+  margin: 5px;
+}
+
+.head-info-2 div:first-child {
+  opacity: 1;
+  font-size: 15px;
+  margin-top: 0px;
+}
+
+.body {
+  height: 80%;
+}
+
+.body-content {
+  height: 80%;
+  padding: 10px;
+}
+
+.body-content-text {
+  color: white;
+  opacity: 0.9;
+  word-wrap: break-word;
+  font-size: 20px;
+}
+
+.body-actions {
+  display: flex;
+  justify-content: flex-end;
+  height: 18%;
+}
+
+.head-icon{
+  margin: 5px 5px 0px 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.likes {
+  display: flex;
+  flex-direction: row;
+  /*margin: 0px 10px 10px 0px;*/
+  margin-right: 10px;
+}
+
+.like-counter {
+  padding-right: 10px;
+  display: flex;
+  align-self: center;
+  font-size: 18px;
+}
+
+.like-action {
+  width: 40px;
+  height: 40px;
+  margin: 0px;
+}
+
+.ng-scope {
+  height: 100% ;
+}
+
+.info-min {
+  display:flex;
+  flex-direction: row;
+}
+
+.delete > img {
+  margin: 5px 5px 0px 0px;
+  width: 20px;
+  height: 20px;
+}

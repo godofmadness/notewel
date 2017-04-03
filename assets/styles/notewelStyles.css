@@ -1,0 +1,11 @@
+.green {
+  background-color: rgb(94,170,94);
+  opacity: 0.8;
+}
+
+
+.yellow {
+  background-color: rgb(211,210,135);
+  opacity: 0.8;
+  color: black;
+}

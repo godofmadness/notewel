@@ -30,7 +30,42 @@ module.exports.routes = {
   * (Alternatively, remove this and add an `index.html` file in your         *
   * `assets` directory)                                                      *
   *                                                                          *
-  ***************************************************************************/
+  ******* ********************************************************************/
+
+  /// USER
+
+
+  'POST /createUser': 'UserController.signup',
+
+  'GET /isLoggedIn': "UserController.isLoggedIn",
+
+  'POST /login': "UserController.login",
+
+  'GET /logout': "UserController.logout",
+
+  'GET /user/:username' : "UserController.findOne",
+
+
+  /// NOTEWELS
+
+
+  // CRUD
+  'GET /notewel/:username': "NotewelController.findAll",
+
+  'GET /notewel/:username/:notewelId': "NotewelController.find",
+
+  'POST /notewel/:userId': "NotewelController.create",
+
+  'DELETE /notewel/:notewelId' : "NotewelController.delete",
+
+
+
+  'POST /like/notewel/:notewelId': "NotewelController.like",
+
+  'POST /removelike/notewel/:notewelId': "NotewelController.removeLike",
+
+
+
 
 
   /***************************************************************************
