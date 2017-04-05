@@ -9,14 +9,16 @@ module.exports = {
 
   migrate: "drop",
 
+  autoPK: false,
+
   attributes: {
 
-    // autoPK: false,
 
     notewelId: {
-      type: 'integer',
-      primaryKey: true,
-      unique: true
+      type: 'text',
+
+      // primaryKey: true,
+      // unique: true
     },
 
     userId: {

@@ -50,6 +50,7 @@ module.exports.routes = {
 
 
   // CRUD
+
   'GET /notewel/:username': "NotewelController.findAll",
 
   'GET /notewel/:username/:notewelId': "NotewelController.find",

@@ -6,6 +6,7 @@
 module.exports = {
 
   executeQuery: function(SQL, params) {
+    // array o
     var params = _.toArray(params);
 
     console.log("PARAMS: " );
@@ -20,8 +21,6 @@ module.exports = {
           resolve(rawResult)
         });
     });
-
   }
-
 
 }

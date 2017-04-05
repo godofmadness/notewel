@@ -10,90 +10,90 @@
  */
 
 module.exports.bootstrap = function(cb) {
-  // return cb();
+  return cb();
 
-    Notewel.create({
-      message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
-      attachments: null,
-      style: "yellow",
-      owner: 'GodOfMadness',
-      userId: 1,
-      numberOfLikes: 12
-    }).exec(function(err, createdNotewel){
-        if (err) {
-          return cb(err)
-        }
-      Notewel.create({
-        message: "consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
-        attachments: null,
-        style: "green",
-        owner: 'GodOfMadness',
-        numberOfLikes: 13
-      }).exec(function(err, createdNotewel){
-        if (err) {
-          return cb(err)
-        }
-        Notewel.create({
-          message: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque ",
-          attachments: null,
-          style: "yellow",
-          owner: 'GodOfMadness',
-          userId: 1,
-          numberOfLikes: 1
-        }).exec(function(err, createdNotewel){
-          if (err) {
-            return cb(err)
-          }
-          Notewel.create({
-            message: " Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? ",
-            attachments: null,
-            style: "yellow",
-            owner: 'GodOfMadness',
-            numberOfLikes: 99
-          }).exec(function(err, createdNotewel){
-            if (err) {
-              return cb(err)
-            }
-            Notewel.create({
-              message: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-              attachments: null,
-              style: "green",
-              owner: 'GodOfMadness',
-              numberOfLikes: 42
-            }).exec(function(err, createdNotewel){
-              if (err) {
-                return cb(err)
-              }
-
-              User.create({
-                username:"max",
-                // userId:1
-              }).exec(function(err, createdUser){
-                if (err) {
-                  return cb(err);
-                }
-                console.log(createdUser)
-
-                User.find({userId:1}).populate("notewels").exec(function(err, data){
-                  if (err) {
-                    return cb(err);
-                  }
-
-                  console.log(data);
-                  return cb();
-                });
-
-              });
-
-
-              //return cb()
-            });
-          });
-        });
-      });
-    });
-
-
+    // Notewel.create({
+    //   message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+    //   attachments: null,
+    //   style: "yellow",
+    //   owner: 'GodOfMadness',
+    //   userId: 1,
+    //   numberOfLikes: 12
+    // }).exec(function(err, createdNotewel){
+    //     if (err) {
+    //       return cb(err)
+    //     }
+    //   Notewel.create({
+    //     message: "consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
+    //     attachments: null,
+    //     style: "green",
+    //     owner: 'GodOfMadness',
+    //     numberOfLikes: 13
+    //   }).exec(function(err, createdNotewel){
+    //     if (err) {
+    //       return cb(err)
+    //     }
+    //     Notewel.create({
+    //       message: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque ",
+    //       attachments: null,
+    //       style: "yellow",
+    //       owner: 'GodOfMadness',
+    //       userId: 1,
+    //       numberOfLikes: 1
+    //     }).exec(function(err, createdNotewel){
+    //       if (err) {
+    //         return cb(err)
+    //       }
+    //       Notewel.create({
+    //         message: " Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? ",
+    //         attachments: null,
+    //         style: "yellow",
+    //         owner: 'GodOfMadness',
+    //         numberOfLikes: 99
+    //       }).exec(function(err, createdNotewel){
+    //         if (err) {
+    //           return cb(err)
+    //         }
+    //         Notewel.create({
+    //           message: "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+    //           attachments: null,
+    //           style: "green",
+    //           owner: 'GodOfMadness',
+    //           numberOfLikes: 42
+    //         }).exec(function(err, createdNotewel){
+    //           if (err) {
+    //             return cb(err)
+    //           }
+    //
+    //           User.create({
+    //             username:"max",
+    //             // userId:1
+    //           }).exec(function(err, createdUser){
+    //             if (err) {
+    //               return cb(err);
+    //             }
+    //             console.log(createdUser)
+    //
+    //             User.find({userId:1}).populate("notewels").exec(function(err, data){
+    //               if (err) {
+    //                 return cb(err);
+    //               }
+    //
+    //               console.log(data);
+    //               return cb();
+    //             });
+    //
+    //           });
+    //
+    //
+    //           //return cb()
+    //         });
+    //       });
+    //     });
+    //   });
+    // });
+    //
+    //
 
   // // Return the number of records in the video model
   // Video.count().exec(function (err, numVideos) {

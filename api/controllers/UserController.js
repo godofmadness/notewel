@@ -61,7 +61,8 @@ module.exports = {
   },
 
   signup: function (req, res) {
-    // console.log('sign up');
+
+
     if (_.isUndefined(req.param('email'))) {  
         return res.badRequest('An email address is required!'); 
     }
@@ -91,6 +92,7 @@ module.exports = {
       string: req.param('email')
     }).exec({
       error: function(err){
+        console.log(err);
         res.serverError(err)
       },
 
@@ -105,6 +107,7 @@ module.exports = {
         }).exec({
 
           error: function(err){
+            console.log(err);
             res.serverError(err)
           },
 
@@ -135,10 +138,18 @@ module.exports = {
                   return res.send(409, 'Username is already taken by another user, please try again.');
                 }
               }
+
+
               User.findOne({username: createdInstance.username}).exec(function(err, findedUser){
+                if (err) {
+                  console.log(err);
+                  return res.send(500, "SERVER error");
+                }
+
                   req.session.userId = findedUser.userId;
-                return res.json(createdInstance)
+                  return res.json(createdInstance)
               });
+
             });
 
           }

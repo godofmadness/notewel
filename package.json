@@ -24,12 +24,14 @@
     "machinepack-gravatar": "^1.2.0",
     "machinepack-passwords": "^2.3.0",
     "machinepack-youtube": "^2.2.0",
+    "mysql": "^2.13.0",
     "promise": "^7.1.1",
     "rc": "1.0.1",
     "sails": "~0.12.1",
     "sails-disk": "~0.10.9",
     "sails-generate-static": "^0.11.3",
-    "sails-mysql": "^0.11.5"
+    "sails-mysql": "^0.11.5",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "debug": "node debug app.js",

@@ -24,10 +24,8 @@ angular.module('notewel').controller('registrationController',['$scope', '$http'
     $http.post('/createUser',{
       email: $scope.email,
       username: $scope.username,
-      password: $scope.password,
-      banned: "false",
-      admin: "false",
-      deleted: "false"
+      password: $scope.password
+
     }).then(function(response) {
       console.log(response.data);
 

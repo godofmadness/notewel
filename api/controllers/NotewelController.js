@@ -4,6 +4,7 @@
  * @description :: Server-side logic for managing notewels
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+const uuid = require('uuid/v4');
 
 module.exports = {
 
@@ -23,6 +24,11 @@ module.exports = {
           console.log(err);
         }
 
+        console.log("====BEFORE SEARCHING FOR LIKES===");
+        console.log(notewels);
+        console.log("========");
+
+        // WHEN loading  user notewels check if this notes contain notes liked by me
       NotewelDAO.getMyLikedNotwelsOnParticularUser({
         myId: req.session.userId,
         userId: findedUser.userId
@@ -31,16 +37,22 @@ module.exports = {
           console.log(data);
           if (data) {
             _.forEach(data, function (likedNotewel) {
-              _.forEach(notewels, function (notewel) {
-                likedNotewel.notewelId === notewel.notewelId ? notewel.liked = true : notewel.liked = false;
-              });
-            });
-          }
 
+              _.find(notewels, function(o) {
+                  return o.notewelId === likedNotewel.notewelId;
+              }).liked = true;
+
+            });
+            console.log("====AFTER SEARCHING FOR LIKES===");
+            console.log(notewels);
+            console.log("========");
+
+          }
           return res.json(notewels);
         })
         .catch(function(err) {
           console.log(err);
+          return res.send(500, "server error");
         });
 
       });
@@ -75,8 +87,10 @@ module.exports = {
       return res.send(403, "You dont have permission to post notewels to another user account");
     }
 
-    // console.log(req.param('message'));
+    var uuidg = uuid();
+    // console.log(uuidg)
     Notewel.create({
+      notewelId: uuidg,
       userId: req.param('userId'),
       message: req.param('message'),
       attachments: null,
@@ -85,23 +99,28 @@ module.exports = {
       private: req.param('private'),
       numberOfLikes: 0
     }).exec(function(err, createdNotewel){
+      // console.log(createdNotewel);
       if (err) {
         return res.send(500, "Server error");
       }
 
-      res.json(createdNotewel);
-
+      return res.json(createdNotewel);
     });
+
+
+      // console.log(req.param('message'));
+
+
   },
 
 
   delete: function(req, res) {
+    console.log("HERE");
     if (!req.session.userId) {
       return res.send(403, "You dont have privelleges to delete");
     }
 
     Notewel.findOne({notewelId: req.param('notewelId')}).exec(function(err, findedNotewel){
-
       if (err) {
         return res.send(500, "server error");
       }
@@ -114,19 +133,33 @@ module.exports = {
         return res.send(403, "You dont have privelleges to delete");
       }
 
+      console.log(findedNotewel);
 
-      Notewel.destroy({notewelId: req.param("notewelId")}).exec(function(err, destroyedRecords){
-        if (err) {
-          return res.send(500, "Server error");
-        }
 
-        if (!destroyedRecords) {
-          return res.send(404, "No such user");
-        }
+      NotewelDAO.unlike({
+        userId: req.session.userId,
+        notewelId: req.param('notewelId')
+      })
+        .then(function () {
 
-        return res.json(destroyedRecords[0]);
+          NotewelDAO.deleteNotewel({
+            notewelId: req.param('notewelId')
+          })
+            .then(function(){
+              res.send(200);
+            })
+            .catch(function(err) {
+              console.log(err);
+              return res.send(500, "Server error");
+            });
 
-      });
+        })
+        .catch(function(err){
+          console.log(err);
+          return res.send(500, err);
+        })
+
+
 
     });
   },
@@ -144,10 +177,11 @@ module.exports = {
       notewelId: req.param('notewelId')
     })
       .then(function (data) {
-      console.log(data);
+      return res.send(200);
     })
       .catch(function (err) {
       console.log(err);
+      return res.send(500, "server error");
     });
 
   },
@@ -163,23 +197,12 @@ module.exports = {
       notewelId: req.param('notewelId')
     })
       .then(function(data) {
+        return res.send(200);
     })
       .catch(function(err) {
         console.log(err);
+        return res.send(500, "server error");
       });
-
-
-    // NotewelDAO.getMyLikedNotwelsOnParticularUser({
-    //   myId: req.session.userId,
-    //   userId: 2
-    // })
-    //   .then(function(data){
-    //     console.log("BIG DATA")
-    //     console.log(data);
-    //   })
-    //   .catch(function(err) {
-    //     console.log(err);
-    //   });
 
 
   }

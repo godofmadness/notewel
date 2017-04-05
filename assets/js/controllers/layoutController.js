@@ -3,7 +3,7 @@ angular.module('notewel').controller('layoutController',['$scope', '$http',"Scop
        */
 
         $http.get('/isLoggedIn').then(function(resposne){
-          console.log(resposne.data)
+          console.log(resposne.data);
           $scope.me = resposne.data;
         });
 
