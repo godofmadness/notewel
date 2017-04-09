@@ -1,11 +1,14 @@
 .notewelHP {
+  margin: 40px 20px 0px 20px;
   background-repeat: no-repeat;
   /*background-image: url("../images/notewelMyNotewelBackground.png");*/
   background-position: center;
   background-size: cover;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) ;
+  grid-gap: 20px;
 }
+
 
 /*!*user info desktop*!*/
 /*.structurizedNotewelCollection-owner {*/
@@ -19,12 +22,13 @@
 
 .notewels-owner-info {
   display: flex;
+  margin-bottom: 20px;
   flex-direction: column;
   background-color: #464646;
 
   /*height: %;*/
-  width: 90%;
-  margin: 40px 0px 0px 50px;
+
+
   -webkit-box-shadow: -1px -1px 10px -1px rgba(0,0,0,0.51);
   -moz-box-shadow: -1px -1px 10px -1px rgba(0,0,0,0.51);
   box-shadow: -1px -1px 10px -1px rgba(0,0,0,0.51);
@@ -182,6 +186,9 @@
   /*align-items: center;*/
 /*}*/
 
+.notewels-owner-wrapper {
+}
+
 
 .notewels-owner-username {
   padding-bottom: 10px;
@@ -190,6 +197,7 @@
   color: white;
   font-size: 20px;
 }
+
 
 .add-notewel {
   height: inherit;
@@ -237,46 +245,194 @@
 .choose-styles-options {
 
 }
-
-.notewel-action {
-  display: flex;
-  justify-content: space-between;
-  height: 15%;
-}
-
 .add-notewel-button {
   /*background-image: url("../images/sendIcon.png");*/
   background-color: #333333;
   border: none;
   padding: 10px;
-  color: #1fca23;
+  color:  #FF8740;
 }
 
-.notewel-rows-container {
-  height: 100%;
-  width: 100%;
-  padding: 32px 20px 0px 20px;
+/*.notewel-rows-container {*/
+  /*height: 100%;*/
+  /*width: 100%;*/
+  /*padding: 32px 20px 0px 20px;*/
 
-}
+/*}*/
 
-.notewel-row-container {
-  margin-top: 10px;
-  height: 35% !important;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-}
+/*.notewel-row-container {*/
+  /*margin-top: 10px;*/
+  /*height: 35% !important;*/
+  /*display: flex;*/
+  /*justify-content: center;*/
+  /*flex-direction: row;*/
+/*}*/
 
 /*NOTEWEL INSTANCE*/
-.notewel {
-  /*transition: width 2s;*/
+/*.notewel {*/
+  /*!*transition: width 2s;*!*/
 
-  /*right: 100px;*/
-  /*width: 100%;*/
-  margin: 10px;
-  max-width: 150%;
-  min-width: 35%;
+  /*!*right: 100px;*!*/
+  /*!*width: 100%;*!*/
+  /*margin: 10px;*/
+  /*max-width: 150%;*/
+  /*min-width: 35%;*/
+/*}*/
+
+
+.notewels-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: repeat(2, minmax(100px, auto));
+
+  grid-gap: 10px;
+  /*grid-auto-flow: dense;/*/
 }
+
+.notewel {
+  word-wrap: break-word;
+  width:100%;
+  height:100%;
+  background-color: #333333;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius:5px;
+  -webkit-box-shadow: -1px -1px 10px -1px rgba(0,0,0,0.51);
+  -moz-box-shadow: -1px -1px 10px -1px rgba(0,0,0,0.51);
+  box-shadow: -1px -1px 10px -1px rgba(0,0,0,0.51);
+}
+
+
+
+/* SMALL NOTEWEL STYLE */
+.small-notewel {
+  border-top:solid 3px #FF7373;
+  font-size: 25px;
+  grid-row: span 1;
+}
+
+.notewel-header-small {
+  padding: 10px 0px 5px 10px;
+  font-size: 17px;
+  border-bottom: solid 1px #464646;
+  height: 30%;
+  display: flex;
+}
+
+.notewel-header-small img {
+  margin: 0px;
+  width: 45px;
+  height:34px;
+}
+
+.notewel-body-small {
+  height: 51%;
+  padding: 10px 20px 20px 20px;
+  border-bottom: solid 1px #464646;
+}
+/**/
+
+/* BIG NOTEWEL STYLE */
+/*.big-notewel {*/
+  /*font-size: 16px;*/
+  /*!*grid-row-end: span2;*!*/
+  /*grid-row: span 3;*/
+/*}*/
+
+/*.notewel-header-big{*/
+  /*padding: 10px 0px 5px 10px;*/
+  /*font-size: 17px;*/
+  /*border-bottom: solid 1px #464646;*/
+  /*height: 14%;*/
+  /*display: flex;*/
+/*}*/
+
+/*.notewel-header-big img {*/
+  /*margin: 0px;*/
+  /*width: 45px;*/
+  /*height:34px;*/
+/*}*/
+
+
+/*.notewel-body-big {*/
+  /*height: 77%;*/
+  /*padding: 20px;*/
+  /*border-bottom: solid 1px #464646;*/
+/*}*/
+/*!**!*/
+
+/* MEDIUM NOTEWEL STYLE */
+.medium-notewel {
+  border-top: solid 3px #FF8740;
+  font-size: 16px;
+  grid-row: span 2;
+}
+
+
+.notewel-header-medium {
+  padding: 10px 0px 5px 10px;
+  font-size: 17px;
+  border-bottom: solid 1px #464646;
+  height: 25%;
+  display: flex;
+}
+
+.notewel-header-medium img {
+  margin: 0px;
+  width: 45px;
+  height:34px;
+}
+
+.notewel-body-medium {
+  height: 62%;
+  padding: 20px;
+  border-bottom: solid 1px #464646;
+}
+
+
+
+/**/
+
+.user-notewels {
+  grid-column-end: span 3;
+}
+
+
+
+.notewel-header-user-info {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-left: 15px;
+}
+
+.notewel-header-creation-date {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+
+.notewel-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.notewel-action-like {
+  padding: 6px;
+  display: flex;
+  flex-direction:row;
+}
+.notewel-action-like-counter {
+  font-size: 15px;
+  padding-right:3px;
+}
+
+.action-icon {
+  margin: 0px 5px 0px 5px;
+  width: 20px;
+  height:20px;
+}
+
 
 .head-info {
   display: flex;
@@ -332,25 +488,6 @@
   border-radius: 100%;
 }
 
-.likes {
-  display: flex;
-  flex-direction: row;
-  /*margin: 0px 10px 10px 0px;*/
-  margin-right: 10px;
-}
-
-.like-counter {
-  padding-right: 10px;
-  display: flex;
-  align-self: center;
-  font-size: 18px;
-}
-
-.like-action {
-  width: 40px;
-  height: 40px;
-  margin: 0px;
-}
 
 .ng-scope {
   height: 100% ;

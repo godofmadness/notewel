@@ -29,10 +29,10 @@ angular.module('notewel').controller('myNotewelController',['$scope', '$http',"n
 
   $scope.badInput = null;
 
-
-  function chunkCollection(targetArray, chunckSize) {
-    return _.chunk(targetArray, chunckSize);
-  }
+  //
+  // function chunkCollection(targetArray, chunckSize) {
+  //   return _.chunk(targetArray, chunckSize);
+  // }
 
 
 
@@ -54,10 +54,23 @@ angular.module('notewel').controller('myNotewelController',['$scope', '$http',"n
 
     if (response.statusCode < 400) {
 
-      if (Array.isArray(response.body)) {
+      _.forEach(response.body, function(notewel) {
+          if(notewel.message.length <= 60) {
+            notewel.size = "small";
+          } else if (notewel.message.length <= 200) {
+            notewel.size = "medium";
+          }
+      });
+
+
+      $scope.structurizedNotewelCollection = response.body.reverse();
+      $scope.$apply();
+      console.log($scope.structurizedNotewelCollection)
+
+      /*if (Array.isArray(response.body)) {
         $scope.structurizedNotewelCollection = chunkCollection(data, 2);
         $scope.$apply();
-      }
+      */
 
     }
   });
@@ -97,7 +110,6 @@ angular.module('notewel').controller('myNotewelController',['$scope', '$http',"n
   $scope.createNotewel = function() {
     if (_.isUndefined($scope.notewelMessage)) {
       console.log('bad input');
-      $scope.badInput = "Bad Input";
       toastr.error('You need to write something');
       return;
     }
@@ -110,24 +122,21 @@ angular.module('notewel').controller('myNotewelController',['$scope', '$http',"n
       // TODO LET CHOOSE STYLES
       style: "yellow"
     }, function (data, JWR) {
+
+      if(data.message.length <= 80) {
+        data.size = "small";
+      } else if (data.message.length <= 200) {
+        data.size = "medium";
+      }
       // HANDLE ERRORS;
+
       console.log(data);
 
       console.log(JWR.statusCode + " : At action create notewell (notewelcontroller)");
 
       // ADD TO COLLECTION
 
-      if ($scope.structurizedNotewelCollection.length === 0)  {
-        $scope.structurizedNotewelCollection = new Array(new Array(data));
-
-      } else if ($scope.structurizedNotewelCollection[$scope.structurizedNotewelCollection.length - 1].length !== 2) {
-
-        $scope.structurizedNotewelCollection[$scope.structurizedNotewelCollection.length - 1].push(data);
-
-      } else {
-        $scope.structurizedNotewelCollection.push(new Array(data));
-      }
-
+      $scope.structurizedNotewelCollection.unshift(data);
       $scope.$apply();
     });
   },

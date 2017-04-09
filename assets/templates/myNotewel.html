@@ -1,7 +1,7 @@
 
-<div class="notewelHP row" >
+<div class="notewelHP">
 
-  <div class="notewels-owner-wrapper col-md-4">
+  <div class="notewels-owner-wrapper">
 
     <!--MY PAGE STATE-->
     <div class="notewels-owner-info" ng-show="user.isMe">
@@ -20,7 +20,7 @@
 
 
       <div class="user-profile">
-        <form class="add-notewel" ng-submit="createNotewel()" name="addFrom">
+        <form class="add-notewel"  name="addFrom">
           <div class="textarea-container">
             <textarea class="user-profile-input__message" placeholder="What's new?" name="message" ng-model="notewelMessage"></textarea>
             <!--<div class="addons">-->
@@ -30,7 +30,7 @@
           </div>
           <div class="notewel-action">
             <div></div>
-            <button type="submit" class="btn btn-success btn-lg btn-block">ADD NOTEWEL</button>
+            <div ng-click="createNotewel()" class="add-notewel-button">ADD NOTEWEL</div>
           </div>
         </form>
         <div ng-if="badInput">
@@ -137,52 +137,150 @@
 
 
 
-  <div class="user-notewels col-md-8">
+  <div class="user-notewels">
 
-  <div class="notewel-rows-container">
+    <div class="notewels-container">
+
+      <div ng-repeat="notewel in structurizedNotewelCollection" class="notewel {{notewel.size}}-notewel" style="color:white">
+
+        <div class="notewel-header-{{notewel.size}}">
+          <img src="../images/noteWelLogo.png">
+          <div class="notewel-header-user-info">
+            <div class="notewel-header-username"> {{user.username}} </div>
+            <div class="notewel-header-creation-date"> {{notewel.updatedAt}}</div>
+          </div>
+        </div>
+
+        <div class="notewel-body-{{notewel.size}}">{{notewel.message}}</div>
+
+        <div class="notewel-action">
+          <div class="notewel-action-like">
+            <div class="notewel-action-like-counter">
+              {{notewel.numberOfLikes}}
+            </div>
+            <!--<img src="../images/liked.png">-->
+              <img ng-hide="notewel.liked" class="action-icon" src="../images/not-liked.png" ng-click="like(notewel)">
+              <img ng-show="notewel.liked" class="action-icon" src="../images/liked.png" ng-click="like(notewel)">
+
+              <img class="action-icon" src="../images/reply-icon.png">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+      <!--<div class="notewel big-notewel" style="color:white">-->
+
+        <!--<div class="notewel-header-big">-->
+          <!--<img src="../images/noteWelLogo.png">-->
+          <!--<div class="notewel-header-user-info">-->
+            <!--<div class="notewel-header-username"> Maxim </div>-->
+            <!--<div class="notewel-header-creation-date"> 20:53</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="notewel-body-big">aminmaxdasd aminmaxdasd aminmaxdasdaminmaxdasdami nmaxdasdaminmaxdas daminmaxdasdaminmaxdaminmaxda sdaminmaxdasdaminm axnmaxdas amidasda sdaminmaxdasdaminmaxdasdami nmaxdasdaminmaxd asdaminmax asdaminmax dasdaminmaxd asdaminmaxdasdaminmaxd asdaminmaxdasdaminma dasdaminmaxdas daminmaxdaminma xdasdaxdasdaminmax dasdaminmaxd asdaminmaxdas daminmaxd asdaminmaxdasdamin maxdasdaminma xdasdaminma xdasdaminmaaxdasd aminmaxdasdaminmaxdasdaminma xdasdaminm axdasdaminm axdasdam inmaxdasdaminmaxda sdaminmaxdasdaminma dsd sd s sds ds dsdsdsds ds ds ddq wdqd</div>-->
+
+        <!--<div class="notewel-action">-->
+          <!--<div class="notewel-action-like">-->
+            <!--<div class="notewel-action-like-counter">-->
+              <!--23-->
+            <!--</div>-->
+            <!--<img class="action-icon" src="../images/not-liked.png">-->
+            <!--<img class="action-icon" src="../images/reply-icon.png">-->
+          <!--</div>-->
+        <!--</div>-->
+
+      <!--</div>-->
+
+
+
+
+
+
+      <!--<div class="notewel small-notewel" style="color:white">-->
+        <!--<div class="notewel-header-small">-->
+          <!--<img src="../images/noteWelLogo.png">-->
+          <!--<div class="notewel-header-user-info">-->
+            <!--<div class="notewel-header-username"> Maxim </div>-->
+            <!--<div class="notewel-header-creation-date"> 20:53</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="notewel-body-small">Wha COme to me right to you son of keMbrig  right to you son of right to you son</div>-->
+
+        <!--<div class="notewel-action">-->
+          <!--<div class="notewel-action-like">-->
+            <!--<div class="notewel-action-like-counter">-->
+              <!--23-->
+            <!--</div>-->
+            <!--<img class="action-icon" src="../images/not-liked.png">-->
+            <!--<img class="action-icon" src="../images/reply-icon.png">-->
+          <!--</div>-->
+        <!--</div>-->
+
+      <!--</div>-->
+
+
+
+
+
+
+
+
+      <!--<div class="notewel meduim-notewel" style="color:white">nmaxdasdaminmaxdasdaminmaxdadaminmaxnmaxdasdamidasdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmax </div>-->
+      <!--<div class="notewel big-notewel" style="color:white">axdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasdaminmaxdasdaminmaxnmaxdasdamidasdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasdaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasdaminmaxdasdaminmaxnmaxdasdamidasdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasd </div>-->
+      <!--<div class="notewel big-notewel" style="color:white">axdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasdaminmaxdasdaminmaxnmaxdasdamidasdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasdaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasdaminmaxdasdaminmaxnmaxdasdamidasdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasd </div>-->
+      <!--<div class="notewel meduim-notewel" style="color:white">dasdamidasdasdamidasdasdaminmdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasdaminmaxdasdaminmaxnmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdasdaminmaxdaminmaxdasdaminmaxdasdaminmaxnmax </div>-->
+      <!--<div class="notewel small-notewel" style="color:white">dasdamidasdasdaminmaxdasdaminmaxdasdaminmaxdasdamix </div>-->
+
+
+    <!--<div class="notewel-rows-container">-->
 
 <!--TODO ADD CREATED TIME TO NOTEWEL-->
 
 
-    <div class="notewel-row-container"  ng-repeat="notewelRow in structurizedNotewelCollection" id="{{$index}}">
+      <!--<div class="notewel-row-container"  ng-repeat="notewelRow in structurizedNotewelCollection" id="{{$index}}">-->
 
-      <div style="visibility: hidden">{{outerIndex = $index}}</div>
-      <div  ng-repeat="notewelInst in notewelRow" id="{{'nt' + outerIndex + $index}}" class="notewel {{notewelInst.style}}">
-        <div class=" head-info">
-          <div class="info-min">
-            <img src="../images/logo.png" class="icon head-icon"> </img>
-            <div class="info head-info-2">
-              <div>{{user.username}}</div>
-            </div>
-          </div>
+        <!--<div style="visibility: hidden">{{outerIndex = $index}}</div>-->
+        <!--<div  ng-repeat="notewelInst in notewelRow" id="{{'nt' + outerIndex + $index}}" class="notewel {{notewelInst.style}}">-->
+          <!--<div class=" head-info">-->
+            <!--<div class="info-min">-->
+              <!--<img src="../images/logo.png" class="icon head-icon"> </img>-->
+              <!--<div class="info head-info-2">-->
+                <!--<div>{{user.username}}</div>-->
+              <!--</div>-->
+            <!--</div>-->
 
-          <div ng-show="user.isMe" class="delete" ng-click="deleteNotewel(notewelInst.notewelId, outerIndex, $index)">
-            <img src=../images/close:deleteButton.png>
-          </div>
-        </div>
-        <div class="body">
-          <div class="body-content">
-            <div class="body-content-text">{{notewelInst.message}}</div>
-          </div>
-          <div class="body-actions">
-            <div class="likes">
-              <div class="like-counter">{{notewelInst.numberOfLikes}}</div>
-              <img ng-hide="notewelInst.liked || me === null" src="../images/notLiked.png" class="like-action" ng-click="like(notewelInst)">
-              <img ng-show="notewelInst.liked " src="../images/liked.ico" class="like-action" ng-click="like(notewelInst)">
-            </div>
+            <!--<div ng-show="user.isMe" class="delete" ng-click="deleteNotewel(notewelInst.notewelId, outerIndex, $index)">-->
+              <!--<img src=../images/close:deleteButton.png>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div class="body">-->
+            <!--<div class="body-content">-->
+              <!--<div class="body-content-text">{{notewelInst.message}}</div>-->
+            <!--</div>-->
+            <!--<div class="body-actions">-->
+              <!--<div class="likes">-->
+                <!--<div class="like-counter">{{notewelInst.numberOfLikes}}</div>-->
+                <!--<img ng-hide="notewelInst.liked || me === null" src="../images/notLiked.png" class="like-action" ng-click="like(notewelInst)">-->
+                <!--<img ng-show="notewelInst.liked " src="../images/liked.ico" class="like-action" ng-click="like(notewelInst)">-->
+              <!--</div>-->
 
-          </div>
-        </div>
-      </div>
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
 
 
-
-      </div>
-
+      <!--</div>-->
 
 
 
 
-
-</div>
+  <!--</div>-->
 

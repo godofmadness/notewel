@@ -38,7 +38,12 @@ angular.module('notewel', ['ngRoute', 'compareTo'])
     .when('/:user', {
       templateUrl: '/templates/myNotewel.html',
       controller: 'myNotewelController'
-    });
+    })
+
+    .when('/feed', {
+      templateUrl: '/templates/feed.html',
+      controller: 'feedController'
+    })
 
 
 }]);
