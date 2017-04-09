@@ -10,9 +10,10 @@
       <div class="main-info ">
         <img src="../images/logo.png" class="icon" > </img>
         <div class="info">
+          <div class="info-userinfo">
           <div>{{user.username}}</div>
           <div>{{user.email}}</div>
-
+          </div>
           <!--<div class="edit-profile">EDIT PROFILE</div>-->
         </div>
       </div>
@@ -46,12 +47,20 @@
     <!--   NOT MY PAGE STATE   -->
     <div class="notewels-owner-info" ng-hide="user.isMe">
 
-
       <div class="main-info ">
         <img src="../images/logo.png" class="icon" > </img>
         <div class="info">
-          <div>{{user.username}}</div>
-          <div>{{user.email}}</div>
+          <div class="info-userinfo">
+            <div>{{user.username}}</div>
+            <div>{{user.email}}</div>
+          </div>
+
+          <div class="follow-button" ng-hide="user.isFollowing || me === null" ng-click="follow()">
+            <img src="../images/add-button.png">
+          </div>
+          <div class="follow-button" ng-show="user.isFollowing">
+            <img src="../images/tick-icon.png">
+          </div>
 
           <!--<div class="edit-profile">EDIT PROFILE</div>-->
         </div>
@@ -66,16 +75,53 @@
 
     <div class="notewels-owner-info">
 
-      <div class="main-info ">
-        <div class="info">
-          <div>Friends</div>
+      <div class="main-info">
+
+        <div class="follow-following notewel-tabs">
+          <div class="tab notewel-active" data-tab="1">Followers</div>
+          <div class="tab" data-tab="2">Following</div>
           <!--<div class="edit-profile">EDIT PROFILE</div>-->
+        </div>
+
+      </div>
+
+      <div class="followers" id="1">
+        <div ng-show="followers.length" class="followers-content">
+          <div ng-repeat="follower in followers" class="follower">
+            <img class="follower-avatar" src="../images/noteWelLogo.png">
+
+            </img>
+            <a ng-href="#/{{follower.username}}" class="follower-name">
+              {{follower.username}}
+            </a>
+          </div>
+        <!--<div class="friends"></div>-->
+        </div>
+
+        <div ng-hide="followers.length" class="followers-content">
+            <div class="followers-nofollowers"> No followers</div>
         </div>
       </div>
 
-      <div class="user-profile">
 
-        <!--<div class="friends"></div>-->
+      <div class="following" id="2">
+
+        <div ng-show="followings.length" class="followers-content">
+
+          <div ng-repeat="following in followings" class="following-inst">
+            <img class="follower-avatar" src="../images/noteWelLogo.png">
+
+            </img>
+            <a ng-href="#/{{following.username}}" class="follower-name">
+              {{following.username}}
+            </a>
+          </div>
+
+        </div>
+
+        <div ng-hide="followings.length" class="followers-content">
+          <div class="followers-nofollowers"> No following</div>
+        </div>
 
       </div>
 
@@ -106,7 +152,7 @@
           <div class="info-min">
             <img src="../images/logo.png" class="icon head-icon"> </img>
             <div class="info head-info-2">
-              <div>{{notewelInst.owner}} {{notewelInst.notewelId}}</div>
+              <div>{{user.username}}</div>
             </div>
           </div>
 
@@ -121,8 +167,8 @@
           <div class="body-actions">
             <div class="likes">
               <div class="like-counter">{{notewelInst.numberOfLikes}}</div>
-              <img ng-hide="notewelInst.liked" src="../images/notLiked.png" class="like-action" ng-click="like(notewelInst)">
-              <img ng-show="notewelInst.liked" src="../images/liked.ico" class="like-action" ng-click="like(notewelInst)">
+              <img ng-hide="notewelInst.liked || me === null" src="../images/notLiked.png" class="like-action" ng-click="like(notewelInst)">
+              <img ng-show="notewelInst.liked " src="../images/liked.ico" class="like-action" ng-click="like(notewelInst)">
             </div>
 
           </div>

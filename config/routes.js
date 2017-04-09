@@ -45,6 +45,11 @@ module.exports.routes = {
 
   'GET /user/:username' : "UserController.findOne",
 
+  'GET /user/:username/followers': 'UserController.findFollowers',
+
+  'GET /user/:username/following': 'UserController.findFollowing',
+
+  'POST /user/:username/follow': 'UserController.follow',
 
   /// NOTEWELS
 

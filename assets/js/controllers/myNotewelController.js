@@ -1,5 +1,8 @@
-angular.module('notewel').controller('myNotewelController',['$scope', '$http',"CustomAnimations", function($scope, $http){
+angular.module('notewel').controller('myNotewelController',['$scope', '$http',"notewelTabs", function($scope, $http, notewelTabs){
 
+
+  // onload initialize tabs
+  notewelTabs.initializeTabs();
 
 
   // $scope.me  = window.NOTEWEL_LOGIN;
@@ -20,7 +23,7 @@ angular.module('notewel').controller('myNotewelController',['$scope', '$http',"C
     "hideEasing": "linear",
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
-  },
+  }
 
   $scope.structurizedNotewelCollection = [];
 
@@ -31,12 +34,24 @@ angular.module('notewel').controller('myNotewelController',['$scope', '$http',"C
     return _.chunk(targetArray, chunckSize);
   }
 
-  var urlToNotes = "/notewel/" + window.location.hash.slice(2, window.location.hash.length);
-  var urlToUserInfo = "/user/" + window.location.hash.slice(2, window.location.hash.length);
 
-  // get user notewels
+
+  var currentUser = window.location.hash.slice(2, window.location.hash.length)
+
+
+  var urlToNotes = "/notewel/" + currentUser;
+  var urlToUserInfo = "/user/" + currentUser;
+
+  var urlToGetFollowers = '/user/' + currentUser + '/followers';
+  var urlToGetFollowing = '/user/' + currentUser + '/following';
+  var urlToFollowAction = '/user/' + currentUser + '/follow';
+
+
+
+
+    // get user notewels
   io.socket.get(urlToNotes, function (data, response) {
-    console.log(response);
+
     if (response.statusCode < 400) {
 
       if (Array.isArray(response.body)) {
@@ -51,10 +66,31 @@ angular.module('notewel').controller('myNotewelController',['$scope', '$http',"C
   // get user info
   $http.get(urlToUserInfo).then(function(response){
     // console.log("IN GETTING USER INFO");
+    console.log(response);
     $scope.user = response.data;
   }).catch(function(err){
     // console.log("IN GETTING USER INFO: (NOTEWEL CONTROLLER):")
-    // console.log(err);
+    console.log(err);
+  });
+
+
+  // get followers
+  $http.get(urlToGetFollowers).then(function(response){
+    $scope.followers = response.data;
+    console.log($scope.followers)
+  }).catch(function(err){
+    console.log(err);
+  });
+
+
+
+  // // get following
+
+  $http.get(urlToGetFollowing).then(function(response){
+    $scope.followings = response.data;
+    console.log($scope.followings);
+  }).catch(function(err){
+    console.log(err);
   });
 
 
@@ -152,22 +188,31 @@ angular.module('notewel').controller('myNotewelController',['$scope', '$http',"C
 
   },
 
+  $scope.follow = function() {
+    console.log('fired');
+    $http.post(urlToFollowAction,{
+      followingId: $scope.user.userId
+    })
+    .then(function(response){
+      console.log(response);
+      $scope.user.isFollowing = true;
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+  },
 
 
   $scope.like = function(currentNotewel) {
 // TODO PREVENT DDOS BY LIKES (MAKING OBSERVER ON ARRAY OF LIKES); OBSERVER CHECKS EVERY MINUTE FOR CHANGE AND IF FOUND UPDATE;
 
     currentNotewel.liked = !currentNotewel.liked;
-    if (currentNotewel.liked) {
+    var operation;
+    currentNotewel.liked ? operation = "like" : operation = "removeLike";
 
-      $http.post('/like/notewel/' + currentNotewel.notewelId).then(function(response){
-        //   console.log(response)
-      });
-    } else {
-      $http.post('/removelike/notewel/' + currentNotewel.notewelId).then(function(response){
-        //   console.log(response)
-      });
-    }
+    $http.post('/'+operation+'/notewel/' + currentNotewel.notewelId).then(function(response){
+      currentNotewel.numberOfLikes = response.data.numberOfLikes;
+    });
 
   }
 

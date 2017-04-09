@@ -75,8 +75,14 @@
   border-radius: 20px;
   padding: 5px 20px 5px 20px;
 }
+.loggedinuser-username a:first-child {
+  text-decoration: none;
+  color: white;
+}
 
-.loggedinuser-username div:first-child:hover {
+.loggedinuser-username a:first-child:hover {
+  text-decoration: none;
+  color: white;
   cursor: pointer;
   border-bottom:solid 2px #38b43a;
 }

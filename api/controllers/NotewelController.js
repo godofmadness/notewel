@@ -24,9 +24,6 @@ module.exports = {
           console.log(err);
         }
 
-        console.log("====BEFORE SEARCHING FOR LIKES===");
-        console.log(notewels);
-        console.log("========");
 
         // WHEN loading  user notewels check if this notes contain notes liked by me
       NotewelDAO.getMyLikedNotwelsOnParticularUser({
@@ -43,9 +40,6 @@ module.exports = {
               }).liked = true;
 
             });
-            console.log("====AFTER SEARCHING FOR LIKES===");
-            console.log(notewels);
-            console.log("========");
 
           }
           return res.json(notewels);
@@ -133,7 +127,6 @@ module.exports = {
         return res.send(403, "You dont have privelleges to delete");
       }
 
-      console.log(findedNotewel);
 
 
       NotewelDAO.unlike({
@@ -169,7 +162,6 @@ module.exports = {
     if(!req.session.userId) {
       return res.send(403, "You need to be logged in");
     }
-
     console.log("LIKED NOTE ID: " + req.param('notewelId'));
 
     NotewelDAO.like({
@@ -177,7 +169,18 @@ module.exports = {
       notewelId: req.param('notewelId')
     })
       .then(function (data) {
-      return res.send(200);
+          Notewel.findOne({notewelId: req.param('notewelId')}).exec(function(err, findedNotewel){
+
+            if (err) {
+              return res.send(500, "server error");
+            }
+
+            if (!findedNotewel) {
+              return res.send(404);
+            }
+
+            return res.json({numberOfLikes: findedNotewel.numberOfLikes});
+          });
     })
       .catch(function (err) {
       console.log(err);
@@ -192,17 +195,30 @@ module.exports = {
       return res.send(403, "You need to be logged in");
     }
 
-    NotewelDAO.unlike({
-      userId: req.session.userId,
-      notewelId: req.param('notewelId')
-    })
-      .then(function(data) {
-        return res.send(200);
-    })
-      .catch(function(err) {
-        console.log(err);
+    Notewel.findOne({notewelId: req.param('notewelId')}).exec(function(err, findedNotewel){
+      if (err) {
         return res.send(500, "server error");
-      });
+      }
+
+      if (findedNotewel.numberOfLikes === 0) {
+        return res.send(200);
+      }
+
+      NotewelDAO.unlike({
+        userId: req.session.userId,
+        notewelId: req.param('notewelId')
+      })
+        .then(function(data) {
+
+          return res.json({numberOfLikes: findedNotewel.numberOfLikes - 1});
+        })
+        .catch(function(err) {
+          console.log(err);
+          return res.send(500, "server error");
+        });
+
+    });
+
 
 
   }

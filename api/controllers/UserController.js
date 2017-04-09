@@ -14,7 +14,6 @@ module.exports = {
 
   login: function(req, res) {
 
-
       if(req.session.userId) {
         return res.send(403, "You already logged in");
       }
@@ -190,7 +189,6 @@ module.exports = {
     if (!req.session.userId) {
       return res.json(null);
     }
-
     User.findOne({userId: req.session.userId}).exec(function(err, user){
       if (err) {
         return res.negotiate(err);
@@ -212,10 +210,6 @@ module.exports = {
         return res.send(404, "User not found.");
       }
 
-      if (err) {
-        return res.negotiate(err);
-      }
-
       var user = {
         isMe: req.session.userId === requestedUser.userId ? true : false,
         email: requestedUser.email,
@@ -224,10 +218,129 @@ module.exports = {
         banned: requestedUser.banned,
         deleted: requestedUser.deleted,
         userId: requestedUser.userId
+      };
+
+      if (err) {
+        return res.negotiate(err);
       }
-      return res.json(user);
+
+      if (!req.session.userId) {
+        return res.json(user);
+      }
+
+      UserDAO.checkMeFollowing({
+        followingId: req.session.userId,
+        followerUsername: requestedUser.username
+      }).then(function(response) {
+        console.log(response)
+        if (!response[0]) {
+          return res.json(user);
+        }
+        user.isFollowing = true;
+        return res.json(user);
+      }).catch(function(err) {
+        console.log(err);
+        return res.send(500, 'Server error');
+      });
+
     })
   },
+
+
+  follow: function(req, res) {
+    console.log('in follow route');
+    if (!req.session.userId) {
+      return res.send(403, "no access");
+    }
+
+    // self follow
+    if (req.param('folowingId') === req.session.userId) {
+      return res.send(403, "you can't follow yourself")
+    }
+
+    // req.param('followingId'); - following
+    // req.session.userId  - follower
+
+    // check if following
+
+    UserDAO.checkMeFollowing({
+      followingId: req.session.userId,
+      followerUsername: req.param('username')
+    }).then(function(response) {
+      if (response[0]) {
+        return res.send(300, 'You already following this user');
+      }
+      UserDAO.follow({
+        followerId: req.session.userId,
+        followingId: req.param('followingId')
+      })
+      .then(function(){
+        return res.send(200);
+      })
+      .catch(function(err) {
+        console.log(err);
+        return res.send(500, 'Server error');
+      })
+
+    });
+
+  },
+
+
+  findFollowers: function(req, res) {
+
+    console.log('in find followers route');
+
+    User.findOne({username: req.param('username')}).exec(function(err, finded){
+      if (err) {
+        return res.send(500, "Server Error.")
+      }
+
+      if (!finded) {
+        return res.send(404, "No user found.")
+      }
+
+
+      UserDAO.findFollowers({
+        userId: finded.userId
+      }).then(function(data){
+
+        return res.json(data);
+      }).catch(function(err){
+        console.log(err);
+        return res.send(500, "server Error");
+      })
+
+    });
+  },
+
+
+
+  findFollowing: function(req, res) {
+    console.log('in find following route');
+
+    User.findOne({username: req.param('username')}).exec(function(err, finded){
+      if (err) {
+        return res.send(500, "Server Error.")
+      }
+
+      if (!finded) {
+        return res.send(404, "No user found.")
+      }
+
+
+      UserDAO.findFollowing({
+        userId: finded.userId
+      }).then(function(data){
+        return res.json(data);
+      }).catch(function(err){
+        console.log(err);
+        return res.send(500, "server Error");
+      })
+
+    });
+  },
+
 
 
   removeProfile: function(req, res) {
