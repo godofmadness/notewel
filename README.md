@@ -1,3 +1,3 @@
-# brushfire-chp6-start
+# NOTEWEL
 
 a [Sails](http://sailsjs.org) application
