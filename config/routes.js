@@ -34,6 +34,8 @@ module.exports.routes = {
 
   /// USER
 
+  //feed
+
 
   'POST /createUser': 'UserController.signup',
 
@@ -51,10 +53,12 @@ module.exports.routes = {
 
   'POST /user/:username/follow': 'UserController.follow',
 
+
+
   /// NOTEWELS
-
-
   // CRUD
+
+  'GET /feed': 'NotewelController.findFeed',
 
   'GET /notewel/:username': "NotewelController.findAll",
 

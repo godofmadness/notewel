@@ -1,5 +1,5 @@
 .notewelHP {
-  margin: 40px 20px 0px 20px;
+  margin: 10px 20px 0px 20px;
   background-repeat: no-repeat;
   /*background-image: url("../images/notewelMyNotewelBackground.png");*/
   background-position: center;
@@ -8,7 +8,6 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) ;
   grid-gap: 20px;
 }
-
 
 /*!*user info desktop*!*/
 /*.structurizedNotewelCollection-owner {*/
@@ -327,7 +326,7 @@
 
 .notewel-body-small {
   height: 51%;
-  padding: 10px 20px 20px 20px;
+  padding: 10px 20px 30px 20px;
   border-bottom: solid 1px #464646;
 }
 /**/
@@ -411,6 +410,24 @@
   opacity: 0.6;
 }
 
+.notewel-header-username {
+  cursor: pointer;
+  text-decoration: none;
+  color: white
+}
+
+.notewel-header-username:hover {
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  opacity: 0.6;
+}
+
+.notewel-header-username:visited {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
 
 .notewel-action {
   display: flex;

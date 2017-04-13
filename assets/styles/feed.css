@@ -1,0 +1,20 @@
+.feed-container {
+  margin:20px;
+}
+
+.feed-button {
+  text-decoration: none;
+  color: white;
+}
+
+
+.feed-button:hover {
+  text-decoration: none;
+  color: white;
+}
+
+
+.feed-button:visited {
+  text-decoration: none;
+  color: white;
+}

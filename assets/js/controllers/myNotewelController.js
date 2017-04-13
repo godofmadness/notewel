@@ -1,8 +1,12 @@
-angular.module('notewel').controller('myNotewelController',['$scope', '$http',"notewelTabs", function($scope, $http, notewelTabs){
+angular.module('notewel').controller('myNotewelController',['$scope', '$http',"notewelTabs", "sharedFunctions",
+  function($scope, $http, notewelTabs, sharedFunctions) {
 
 
   // onload initialize tabs
   notewelTabs.initializeTabs();
+
+  // memStorage.set("like", $scope.like);
+
 
 
   // $scope.me  = window.NOTEWEL_LOGIN;
@@ -211,19 +215,24 @@ angular.module('notewel').controller('myNotewelController',['$scope', '$http',"n
     })
   },
 
+  //
+  // $scope.like = function(currentNotewel) {
+  // // TODO PREVENT DDOS BY LIKES (MAKING OBSERVER ON ARRAY OF LIKES); OBSERVER CHECKS EVERY MINUTE FOR CHANGE AND IF FOUND UPDATE;
+  //
+  //   currentNotewel.liked = !currentNotewel.liked;
+  //   var operation;
+  //   currentNotewel.liked ? operation = "like" : operation = "removeLike";
+  //
+  //   $http.post('/'+operation+'/notewel/' + currentNotewel.notewelId).then(function(response){
+  //     currentNotewel.numberOfLikes = response.data.numberOfLikes;
+  //   });
+  // }
 
-  $scope.like = function(currentNotewel) {
-// TODO PREVENT DDOS BY LIKES (MAKING OBSERVER ON ARRAY OF LIKES); OBSERVER CHECKS EVERY MINUTE FOR CHANGE AND IF FOUND UPDATE;
 
-    currentNotewel.liked = !currentNotewel.liked;
-    var operation;
-    currentNotewel.liked ? operation = "like" : operation = "removeLike";
+    $scope.like = function (notewel) {
+      sharedFunctions.like(notewel)
+    }
 
-    $http.post('/'+operation+'/notewel/' + currentNotewel.notewelId).then(function(response){
-      currentNotewel.numberOfLikes = response.data.numberOfLikes;
-    });
-
-  }
 
 
     //TODO MAKE LIVE ADDING USING ON (SAILS 14 CHAPTER)

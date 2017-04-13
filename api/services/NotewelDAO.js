@@ -5,6 +5,12 @@
 module.exports = {
 
 
+  findFeed: function(params) {
+    var SQL = 'select message, numberOfLikes,notewel.updatedAt, notewelId, username from relationship ' +
+      'inner join notewel on followingId = userId inner join user on notewel.userId = user.userId where followerId = ?;';
+    return DAO.executeQuery(SQL, params);
+  },
+
   like: function(params) {
 
     var SQL = "INSERT INTO likes (userId, notewelId) values (?,?);";
@@ -37,6 +43,13 @@ module.exports = {
     } else {
       var SQL = "update notewel set numberOfLikes = numberOfLikes + 1 where notewelId = ?";
     }
+
+    return DAO.executeQuery(SQL, params);
+
+  },
+
+  findAllLikes: function (params) {
+    var SQL = "select notewelId from likes where userId = ?;";
 
     return DAO.executeQuery(SQL, params);
 

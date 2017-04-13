@@ -55,6 +55,47 @@ module.exports = {
     });
   },
 
+
+
+  findFeed: function(req, res){
+    console.log('finding feed 4 ya');
+    if (!req.session.userId) {
+      return res.send(403, "You need to be logged in to perform that action");
+    }
+
+    NotewelDAO.findFeed({
+      myId: req.session.userId
+    }).then(function(data){
+
+        console.log(data);
+        // find all likes by current session
+
+        NotewelDAO.findAllLikes({
+          myId: req.session.userId
+        }).then(function(findedLikedNotewels){
+          console.log(findedLikedNotewels);
+
+          if (!findedLikedNotewels) {
+            return res.json(data);
+          }
+
+          // find liked notes in all feed and set liked to true
+          NotewelService.merge(findedLikedNotewels, data).then(function(){
+            // console.log('in promise');
+            NotewelService.sortByTime(data).then(function(){
+              console.log(data);
+              return res.json(data);
+            });
+          });
+        }).catch(function(err){ return res.send(500, "Server error"); });
+      }).catch(function(err){
+          return res.send(500, "Server error");
+    });
+
+  },
+
+
+
   find: function(req, res) {
     Notewel.findOne({notewelId: req.param('notewelId')}).exec(function(err, findedNotewel){
       if (err) {

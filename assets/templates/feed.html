@@ -1,0 +1,34 @@
+
+
+
+<div class="user-notewels feed-container">
+  <div class="notewels-container">
+
+    <div ng-repeat="notewel in feed" class="notewel {{notewel.size}}-notewel" style="color: white" >
+
+      <div class="notewel-header-{{notewel.size}}">
+        <img src="../images/noteWelLogo.png">
+        <div class="notewel-header-user-info">
+          <a class="notewel-header-username" href="#/{{notewel.username}}"> {{notewel.username}} </a>
+          <div class="notewel-header-creation-date"> {{notewel.updatedAt}}</div>
+        </div>
+      </div>
+
+      <div class="notewel-body-{{notewel.size}}">{{notewel.message}}</div>
+
+      <div class="notewel-action">
+        <div class="notewel-action-like">
+          <div class="notewel-action-like-counter">
+            {{notewel.numberOfLikes}}
+          </div>
+          <!--<img src="../images/liked.png">-->
+          <img ng-hide="notewel.liked" class="action-icon" src="../images/not-liked.png" ng-click="like(notewel)">
+          <img ng-show="notewel.liked" class="action-icon" src="../images/liked.png" ng-click="like(notewel)">
+
+          <img class="action-icon" src="../images/reply-icon.png">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

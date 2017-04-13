@@ -35,15 +35,15 @@ angular.module('notewel', ['ngRoute', 'compareTo'])
       controller: 'registrationController'
     })
 
-    .when('/:user', {
-      templateUrl: '/templates/myNotewel.html',
-      controller: 'myNotewelController'
-    })
-
     .when('/feed', {
       templateUrl: '/templates/feed.html',
       controller: 'feedController'
     })
+
+    .when('/:user', {
+      templateUrl: '/templates/myNotewel.html',
+      controller: 'myNotewelController'
+    });
 
 
 }]);
