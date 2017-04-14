@@ -58,6 +58,10 @@ module.exports = {
 
 
   findFeed: function(req, res){
+    if (req.isSocket) {
+      console.log('SOCKET REQUERST');
+    }
+
     console.log('finding feed 4 ya');
     if (!req.session.userId) {
       return res.send(403, "You need to be logged in to perform that action");

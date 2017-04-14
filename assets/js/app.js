@@ -40,6 +40,11 @@ angular.module('notewel', ['ngRoute', 'compareTo'])
       controller: 'feedController'
     })
 
+    .when('/chat', {
+      templateUrl: '/templates/chat.html',
+      controller: 'chatController'
+    })
+
     .when('/:user', {
       templateUrl: '/templates/myNotewel.html',
       controller: 'myNotewelController'

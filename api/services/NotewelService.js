@@ -29,30 +29,27 @@ module.exports = {
 
   sortByTime: function(collection) {
       return new Promise(function(resolve, reject){
-        var time =[]
+        var time =[];
         console.log(collection);
         _.forEach(collection, function(item){
           item.updatedAt = Date.parse( item.updatedAt);
         });
 
-        collection.sort(function(element1, element2){
-          return element2.updatedAt - element1.updatedAt;
-        });
+        collection
+          .sort(function(element1, element2){
+            return element2.updatedAt - element1.updatedAt;
+          })
+          .filter(function(item) {
+            // if note was made not less then two hours ago
+            return item.updatedAt > (Date.parse(Date.now()) - 7200000)
+          })
+          .forEach(function(item){
 
-        collection.filter(function(item) {
-          // if note was made not less then two hours ago
-          return item.updatedAt > (Date.parse(Date.now()) - 7200000)
-        })
-
-        _.forEach(collection, function(item){
-
-          time.push(new Date(item.updatedAt).getHours())
-          time.push(new Date(item.updatedAt).getMinutes())
-
-          item.updatedAt = time.join(":");
-          time = []
-        });
-        console.log(collection)
+            time.push(new Date(item.updatedAt).getHours());
+            time.push(new Date(item.updatedAt).getMinutes());
+            item.updatedAt = time.join(":");
+            time = []
+          });
 
         resolve(collection);
       });

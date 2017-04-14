@@ -2,6 +2,13 @@ angular.module('notewel').controller('layoutController',['$scope', '$http',"Scop
        * Created by mm on 4/1/17.
        */
 
+        // $scope.chatPage = false;
+        //
+        // // if chat hide bar
+        // if (window.location.hash === "#/chat") {
+        //   $scope.chatPage = true;
+        // }
+
         $http.get('/isLoggedIn').then(function(resposne){
           console.log(resposne.data);
           $scope.me = resposne.data;
@@ -12,6 +19,7 @@ angular.module('notewel').controller('layoutController',['$scope', '$http',"Scop
           console.log(event);
           $scope.me = event.detail.me;
         });
+
 
 
 
